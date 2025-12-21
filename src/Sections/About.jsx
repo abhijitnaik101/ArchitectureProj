@@ -1,51 +1,159 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import arch10 from "../assets/arch10.jpg";
+import arch14 from "../assets/arch14.jpg";
+
+
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 1.5,
+      ease: "easeOut",
+    },
+  },
+};
+
 
 const About = () => {
-    return (
-        <>
-            <div className="h-screen w-screen flex justify-center p-5">
+  return (
+    <section
+      id="about"
+      className="w-full bg-white px-4 sm:px-8 lg:px-16 py-16 mb-20"
+    >
+      <motion.div
+        className="max-w-7xl mx-auto"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
+        <div className="flex flex-col gap-12 lg:grid lg:grid-cols-3 lg:gap-10">
 
-                <div className="w-1/3 h-full bg-slate-50 p-5 flex flex-col justify-between items-start">
-                    <p className="text-6xl font-semibold">ABOUT US</p>
-                    <button className="h-12 w-36 rounded-lg bg-black text-white text-md hover:bg-slate-900">learn more</button>
-                    <div className="h-3/4 w-full bg-cover bg-center bg-[url('assets/arch10.jpg')]"></div>
-                </div>
+     
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col gap-6 bg-slate-50 p-6 rounded-xl"
+          >
+            <h2 className="text-6xl font-semibold">ABOUT US</h2>
 
-                <div className="w-1/3 h-full flex flex-col justify-end">
-                    <div className="w-full h-1/3 flex flex-wrap">
-                        <AboutStat number={30} topic={"Years of Experience"}/>
-                        <AboutStat number={230} topic={"Project Completeted"}/>
-                        <AboutStat number={45} topic={"Awards gained"}/>
-                        <AboutStat number={100} topic={"Architectural Engineer"}/>
-                    </div>
-                    <div className="w-full h-2/5 p-5 rounded-lg bg-stone-200">
-                        <p className="text-lg">
-                            Welcome to our architectural firm, where creativity meets functionality. With a passion for design excellence, we specialize in crafting innovative and sustainable spaces that inspire. Our team of talented architects is dedicated to transforming visions into reality, delivering timeless designs that enrich lives and communities worldwide.
-                        </p>
-                    </div>
-                </div>
+            <button className="h-12 w-36 rounded-lg bg-black text-white hover:bg-slate-900 transition">
+              Learn more
+            </button>
 
-                <div className="w-1/3 h-full p-10 bg-slate-50">
-                    <div className="w-full h-full bg-cover bg-center bg-[url('assets/arch14.jpg')]">
-                        <div className="relative top-5 left-8 font-bold text-xl">WE THINK. WE CREATE.</div>
-                    </div>
-                </div>
+            <div
+              className="w-full h-[280px] sm:h-[360px] rounded-lg bg-cover bg-center shadow-md"
+              style={{ backgroundImage: `url(${arch10})` }}
+            />
+          </motion.div>
+
+      
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col gap-8 justify-end"
+          >
+            <div className="grid grid-cols-2 gap-4">
+              <AboutStat number={30} topic="Years of Experience" />
+              <AboutStat number={230} topic="Projects Completed" />
+              <AboutStat number={45} topic="Awards Gained" />
+              <AboutStat number={100} topic="Architectural Engineers" />
             </div>
-        </>
-    )
-}
 
-
-const AboutStat = (props) => {
-
-    return (
-        <>
-            <div className="w-1/2 h-1/2 pl-5 border-[1px] border-slate-300 border-solid p-2 flex justify-start items-center">
-                <p className="text-5xl font-bold mr-2">{props.number}</p>
-                <p className="text-sm font-semibold w-1/2">{props.topic}</p>
+            <div className="rounded-xl bg-stone-200 p-6 sm:p-8">
+              <p className="text-base sm:text-lg leading-relaxed text-justify">
+                Welcome to our architectural firm, where creativity meets
+                functionality. With a passion for design excellence, we
+                specialize in crafting innovative and sustainable spaces that
+                inspire.
+              </p>
             </div>
-        </>
-    )
-}
+          </motion.div>
+
+      
+          <motion.div
+            variants={fadeIn}
+            className="bg-slate-50 p-6 rounded-xl"
+          >
+            <div
+              className="w-full h-[360px] sm:h-[480px] lg:h-full rounded-xl bg-cover bg-center relative shadow-md"
+              style={{ backgroundImage: `url(${arch14})` }}
+            >
+              <div className="absolute top-6 left-6 font-bold text-lg bg-white/80 px-4 py-2 rounded">
+                WE THINK. WE CREATE.
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+
+const AboutStat = ({ number, topic }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const duration = 1500; // ms
+    const frameRate = 16;
+    const totalFrames = duration / frameRate;
+    const increment = number / totalFrames;
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= number) {
+        setCount(number);
+        clearInterval(timer);
+      } else {
+        setCount(Math.ceil(start));
+      }
+    }, frameRate);
+
+    return () => clearInterval(timer);
+  }, [isInView, number]);
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={fadeUp}
+      className="flex items-center gap-3 border border-slate-300 rounded-lg p-4 bg-white"
+    >
+      <p className="text-4xl font-bold tabular-nums">
+        {count}+
+      </p>
+      <p className="text-sm font-semibold leading-tight">
+        {topic}
+      </p>
+    </motion.div>
+  );
+};
 
 export default About;
