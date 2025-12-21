@@ -49,7 +49,7 @@ const Info = () => {
               <span className="block font-semibold text-5xl sm:text-4xl lg:text-6xl">
                 MARVELOUS:
               </span>
-              <span className="block font-semibold text-right sm:text-left text-3xl sm:text-3xl lg:text-4xl text-blue-700">
+              <span className="block font-semibold text-left text-3xl sm:text-3xl lg:text-4xl text-blue-700">
                 MODERN LIFE LIVES HERE
               </span>
             </h2>

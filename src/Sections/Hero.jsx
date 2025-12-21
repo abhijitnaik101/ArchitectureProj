@@ -65,7 +65,7 @@ const Hero = () => {
         >
           <motion.h1
             variants={itemVariants}
-            className="font-murecho font-bold text-4xl sm:text-4xl lg:text-6xl tracking-tight"
+            className="font-murecho font-bold text-5xl sm:text-4xl lg:text-6xl tracking-tight"
           >
             ARCHITECTURE <br className="hidden sm:block" /> SOLUTIONS
           </motion.h1>
