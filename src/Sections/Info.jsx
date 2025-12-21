@@ -46,7 +46,7 @@ const Info = () => {
 
           <motion.div variants={fadeUp} className="flex flex-col gap-8">
             <h2 className="leading-tight">
-              <span className="block font-semibold text-6xl sm:text-5xl lg:text-6xl">
+              <span className="block font-semibold text-6xl sm:text-4xl lg:text-6xl">
                 MARVELOUS:
               </span>
               <span className="block font-semibold text-right sm:text-left text-4xl sm:text-3xl lg:text-4xl text-blue-700">
