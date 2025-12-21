@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 
+import arch1 from "../assets/arch1.jpg";
+import arch2 from "../assets/arch2.jpg";
+import arch10 from "../assets/arch10.jpg";
 
-
+/* ---------- ANIMATION VARIANTS ---------- */
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
@@ -41,8 +44,7 @@ const imageVariants = {
   },
 };
 
-
-
+/* ---------- COMPONENT ---------- */
 const Hero = () => {
   return (
     <section
@@ -56,6 +58,7 @@ const Hero = () => {
         animate="show"
       >
 
+        {/* LEFT MAIN */}
         <motion.div
           className="w-full lg:w-2/3 flex flex-col items-center text-center gap-6"
           variants={containerVariants}
@@ -69,16 +72,12 @@ const Hero = () => {
 
           <motion.button
             variants={itemVariants}
-            whileHover={{
-              scale: 1.08,
-              backgroundColor: "#1e293b",
-            }}
+            whileHover={{ scale: 1.08, backgroundColor: "#1e293b" }}
             whileTap={{ scale: 0.96 }}
             transition={{ duration: 0.4 }}
-            className="flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg transition-colors"
+            className="flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-lg"
           >
-            Let’s talk
-            <FiArrowRight />
+            Let’s talk <FiArrowRight />
           </motion.button>
 
           <motion.div
@@ -88,19 +87,18 @@ const Hero = () => {
             className="w-full flex justify-center"
           >
             <img
-              src="src/assets/arch1.jpg"
+              src={arch1}
               alt="Architecture"
               className="w-full sm:w-4/5 lg:w-full max-h-[520px] object-cover rounded-xl shadow-md"
             />
           </motion.div>
         </motion.div>
 
-
+        {/* RIGHT SIDE */}
         <motion.div
           className="w-full lg:w-1/3 flex flex-col gap-10"
           variants={containerVariants}
         >
-
           <motion.div
             variants={itemVariants}
             whileHover={{
@@ -111,7 +109,7 @@ const Hero = () => {
             className="border border-slate-200 rounded-xl p-6 flex flex-col gap-4 shadow-sm bg-white"
           >
             <img
-              src="src/assets/arch2.jpg"
+              src={arch2}
               alt="Architecture"
               className="w-full h-56 object-cover rounded-lg"
             />
@@ -120,7 +118,6 @@ const Hero = () => {
             </p>
           </motion.div>
 
- 
           <motion.div
             variants={itemVariants}
             whileHover={{
@@ -136,7 +133,7 @@ const Hero = () => {
             </p>
 
             <motion.img
-              src="src/assets/arch10.jpg"
+              src={arch10}
               alt="Architecture"
               className="w-full h-56 object-cover rounded-lg mb-4"
               whileHover={{ scale: 1.05 }}
@@ -151,6 +148,7 @@ const Hero = () => {
             </div>
           </motion.div>
         </motion.div>
+
       </motion.div>
     </section>
   );
