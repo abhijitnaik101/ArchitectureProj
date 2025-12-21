@@ -146,10 +146,10 @@ const AboutStat = ({ number, topic }) => {
       variants={fadeUp}
       className="flex items-center gap-3 border border-slate-300 rounded-lg p-4 bg-white"
     >
-      <p className="text-4xl font-bold tabular-nums">
+      <p className="text-2xl sm:text-4xl font-bold tabular-nums">
         {count}+
       </p>
-      <p className="text-sm font-semibold leading-tight">
+      <p className="text-xs sm:text-sm font-semibold leading-tight">
         {topic}
       </p>
     </motion.div>
